@@ -45,7 +45,6 @@ library(ggplot2)
                                         min = 0,
                                         max = 15,
                                         value = 1)))
-                        
                  ),
                  column(width = 8,
                         br(),
@@ -71,17 +70,21 @@ server = function(input, output) {
                           "poor condition. Consider harvesting this fish")))
    })
    
+   b = eventReactive(input$calc, { 
+      
+      length = seq(wsVal(input$species)$min.TL, wsVal(input$species)$min.TL * 5, 1)
+      weight = 10^(wsVal(input$species)$int + wsVal(input$species)$slope * log10(length))
+      
+      length = length / 25.4
+      weight = weight * 0.00220462
+      
+      as.data.frame(cbind(length, weight))
+      
+   })
+   
    output$plot = renderPlot({
       
-       length = seq(wsVal(input$species)$min.TL, wsVal(input$species)$min.TL * 5, 1)
-       weight = 10^(wsVal(input$species)$int + wsVal(input$species)$slope * log10(length))
-       
-       length = length / 25.4
-       weight = weight * 0.00220462
-       
-       b = as.data.frame(cbind(length, weight))
-       
-       colnames(b) = c("length", "weight")
+      b = b()
       
       ggplot(b, aes(x = length, y= weight)) +
          geom_line(size  = 1.5, color = "blue") +
@@ -101,9 +104,9 @@ server = function(input, output) {
          
          ylab("Weight (Pounds)") +
          
-         xlim(0, max(length)) +
+         xlim(0, max(b$length)) +
          
-         ylim(0, max(weight)) 
+         ylim(0, max(b$weight)) 
       
    })
    
