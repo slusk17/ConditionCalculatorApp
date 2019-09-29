@@ -48,9 +48,9 @@ ui <- fluidPage(
              ),
              column(width = 8,
                     br(),
-                    actionButton("calc", "Calculate Relative Weight",  style="font-family: 'times'; color: #fff; background-color: #337ab7; border-color: #2e6da4"), #CURRENTLY DOESN'T DO ANYTHING
+                    actionButton("calc", "Calculate Relative Weight",  style="font-family: 'times'; color: #fff; background-color: #337ab7; border-color: #2e6da4"),
                     verbatimTextOutput("nText"),
-                    tags$head(tags$style("#nText{color:black; font-size: 12px; font-family: 'times'; overflow-y: visible; background: white;}")),
+                    tags$head(tags$style("#nText{white-space: normal; color:black; max-width: 100; word-break: keep-all; font-size: 20px; font-family: 'times'; background: white;}")),
                     plotOutput("plot"))
            )
     )
