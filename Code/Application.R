@@ -1,6 +1,9 @@
-library(shiny)
-library(FSA)
-library(ggplot2)
+# This script is used to generate an R Shiny Application designed to allow anglers 
+# to evaluate the condition of fish they catch.
+
+library(shiny) # shiny()
+library(FSA) #
+library(ggplot2) # ggplot()
 
 ui <- fluidPage(
   fluidRow(
