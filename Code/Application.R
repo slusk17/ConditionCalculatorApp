@@ -2,7 +2,7 @@
 # to evaluate the condition of fish they catch.
 
 library(shiny) # shiny()
-library(FSA) #
+library(FSA) # wsVal()
 library(ggplot2) # ggplot()
 
 ui <- fluidPage(
